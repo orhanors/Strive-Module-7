@@ -3,24 +3,29 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./styles.scss";
 function Job(props) {
-	const stringToHTML = function (str) {
-		let htmlObject = document.createElement("div");
-		htmlObject.innerHTML = str;
-		return htmlObject;
-	};
-
 	const { job } = props;
 	return (
-		<div>
-			<Card style={{ width: "13rem" }}>
-				<Card.Img variant='top' src={job?.company_logo} />
+		<div className='job-card-container mb-5'>
+			<Card className='job-card' style={{ width: "15rem" }}>
+				<img
+					className='mx-3 my-3'
+					alt='company-logo'
+					src={job?.company_logo}
+				/>
 				<Card.Body>
-					<Card.Title>{job?.title}</Card.Title>
-					<Card.Text>
-						{job?.description.substring(0, 40) + "..."}
-					</Card.Text>
+					<div className='job-title'>
+						<p>{job?.title.substring(0, 43)}</p>
+					</div>
+					<div style={{ marginBottom: "10rem" }}>
+						<p className='job-subinfo'>
+							{job?.company.substring(0, 16)}
+						</p>
+						<p className='job-subinfo'>{job?.location}</p>
+					</div>
 					<Link to={`/jobs/${job.id}`}>
-						<button id={job?.id}>Go somewhere</button>
+						<button className='success-btn' id={job?.id}>
+							Detail
+						</button>
 					</Link>
 				</Card.Body>
 			</Card>

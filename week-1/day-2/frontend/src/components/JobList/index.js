@@ -7,7 +7,7 @@ function JobList(props) {
 		<div>
 			<Row>
 				{jobs?.map((job, index) => (
-					<Col key={index} md={3}>
+					<Col key={index} sm={12} md={6} lg={3}>
 						<Job job={job} />
 					</Col>
 				))}

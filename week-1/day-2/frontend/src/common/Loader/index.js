@@ -2,10 +2,10 @@ import React from "react";
 import "./styles.scss";
 function Loader() {
 	return (
-		<div class='container-loader'>
-			<div class='circle'></div>
-			<div class='circle'></div>
-			<div class='circle'></div>
+		<div className='container-loader'>
+			<div className='circle'></div>
+			<div className='circle'></div>
+			<div className='circle'></div>
 		</div>
 	);
 }

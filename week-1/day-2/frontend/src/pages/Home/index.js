@@ -6,62 +6,40 @@ import JobList from "../../components/JobList/index";
 import Loader from "../../common/Loader";
 
 function Home(props) {
-	const [searchPosition, setSearchPosition] = useState("");
-	const [searchLocation, setSearchLocation] = useState("");
-	const [jobList, setJobList] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
+	const {
+		isLoading,
+		searchPosition,
+		searchLocation,
+		jobList,
+		handleChange,
+		handleSearch,
+	} = props;
 
-	useEffect(() => {
-		defaultJobSearch();
-	}, []);
+	const successBody = () => {
+		return (
+			<Row>
+				<Col md={12}>
+					<div>
+						<Search
+							handleSearch={handleSearch}
+							values={{
+								position: searchPosition,
+								location: searchLocation,
+							}}
+							handleChange={handleChange}
+						/>
+					</div>
+				</Col>
 
-	const defaultJobSearch = async () => {
-		const jobs = await getJobs();
-		setJobList(jobs);
-		setIsLoading(false);
+				<Col md={12}>
+					<div>
+						<JobList jobs={jobList} />
+					</div>
+				</Col>
+			</Row>
+		);
 	};
-
-	const handleChange = async (e) => {
-		const currentId = e.target.id;
-
-		if (currentId == "search-location") setSearchLocation(e.target.value);
-		else setSearchPosition(e.target.value);
-	};
-
-	const handleSearch = async () => {
-		setIsLoading(true);
-		const jobs = await getJobs(searchPosition, searchLocation);
-		setJobList(jobs);
-		setIsLoading(false);
-	};
-	return (
-		<Container>
-			{isLoading ? (
-				<Loader />
-			) : (
-				<Row>
-					<Col md={12}>
-						<div>
-							<Search
-								handleSearch={handleSearch}
-								values={{
-									position: searchPosition,
-									location: searchLocation,
-								}}
-								handleChange={handleChange}
-							/>
-						</div>
-					</Col>
-
-					<Col md={12}>
-						<div>
-							<JobList jobs={jobList} />
-						</div>
-					</Col>
-				</Row>
-			)}
-		</Container>
-	);
+	return <Container>{isLoading ? <Loader /> : successBody()}</Container>;
 }
 
 export default Home;
