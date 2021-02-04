@@ -15,6 +15,16 @@ export default function mainReducer(state = initialState, action) {
 			};
 		case actions.GET_SAVED_JOBS_FAILURE:
 			return { ...state, jobErrors: action.payload };
+
+		case actions.REMOVE_JOB:
+			return {
+				...state,
+				savedJobs: [
+					...state.savedJobs.filter(
+						(job) => job.id !== action.payload
+					),
+				],
+			};
 		default:
 			return state;
 	}

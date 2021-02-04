@@ -14,3 +14,8 @@ export const getSavedJobsError = (error) => ({
 	type: actions.GET_SAVED_JOBS_FAILURE,
 	payload: error,
 });
+
+export const removeJob = (jobId) => ({
+	type: actions.REMOVE_JOB,
+	payload: jobId,
+});

@@ -1,29 +1,27 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./styles.scss";
 import { BiLabel } from "react-icons/bi";
 import { IoIosRemoveCircle } from "react-icons/io";
 import { IconContext } from "react-icons";
 import { getSingleJob } from "../../api/search";
-import { saveJob } from "../../api/userJobs";
 import { isAuthenticated } from "../../helpers/auth";
+import { useDispatch } from "react-redux";
+import { addJob } from "../../store/jobs";
 
 function Job(props) {
 	const { job } = props;
+	const dispatch = useDispatch();
 
 	const handleSaveJob = async (e) => {
 		if (!isAuthenticated()) {
-			window.location.href = "http://localhost:3000/auth/login";
+			props.history.push("/auth/login");
 		} else {
-			const jobId = e.target.id;
-
-			const jobData = await getSingleJob(jobId);
-			const response = await saveJob(jobData);
-			if (response.data) {
-				console.log("successfully added new job: ");
-			}
-			window.location.href = "http://localhost:3000/jobs";
+			//TODO SAVE JOB STORE
+			const job = await getSingleJob(e.target.id);
+			dispatch(addJob(job));
+			props.history.push("/jobs");
 		}
 	};
 	return (
@@ -87,4 +85,4 @@ function Job(props) {
 	);
 }
 
-export default Job;
+export default withRouter(Job);
