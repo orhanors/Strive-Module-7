@@ -16,8 +16,8 @@ const NavBar = (props) => {
 	const handleLogout = () => {
 		authLogout(() => {
 			//TODO MAKE ALL STATES TO INITAL VALUE
-			dispatch(logout());
-			dispatch(clearJobs());
+			// dispatch(logout());
+			//dispatch(clearJobs());
 			props.history.push("/auth/login");
 		});
 	};

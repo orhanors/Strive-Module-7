@@ -57,14 +57,6 @@ const slice = createSlice({
 				),
 			],
 		}),
-
-		clearJobs: (state, action) => ({
-			jobList: [],
-			savedJobs: [],
-			loading: false,
-			lastFetch: null,
-			errorMessage: null,
-		}),
 	},
 });
 export const {
@@ -74,7 +66,6 @@ export const {
 	jobRequested,
 	jobRequestFailed,
 	setSavedJobs,
-	clearJobs,
 } = slice.actions;
 
 //Action creators

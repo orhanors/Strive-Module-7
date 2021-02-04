@@ -16,10 +16,8 @@ function Signin(props) {
 	const dispatch = useDispatch();
 	//If the user is logged in, dont redirect him to signin page
 	useEffect(() => {
-		if (isAuthenticated() && isAuthenticated().role === 1) {
+		if (isAuthenticated()) {
 			//if admin tries to go to signin page even if he logged in, redirect him to admin page
-			history.push("/admin/dashboard");
-		} else if (isAuthenticated() && isAuthenticated().role === 0) {
 			history.push("/");
 		}
 	}, [history]);
@@ -62,7 +60,6 @@ function Signin(props) {
 			//If there is an error incoming response
 			signin(body)
 				.then((response) => {
-					console.log("signin response is: ", response);
 					setAuth(response.data.token, response.data.user);
 					dispatch(login(response.data.user));
 					dispatch(setSavedJobs(response.data.user.savedJobs));

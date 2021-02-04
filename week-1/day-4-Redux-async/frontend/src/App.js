@@ -20,18 +20,18 @@ import { getLocalStorage } from "./helpers/localStorage";
 function App(props) {
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		const user = getLocalStorage("user");
-		if (isAuthenticated()) {
-			dispatch(login(user));
-			dispatch(setSavedJobs(user.savedJobs));
-		}
-	}, []);
+	// useEffect(() => {
+	// 	const user = getLocalStorage("user");
+	// 	if (isAuthenticated()) {
+	// 		dispatch(login(user));
+	// 		dispatch(setSavedJobs(user.savedJobs));
+	// 	}
+	// }, []);
 	return (
 		<div>
 			<Router>
 				<NavBar />
-				<Route path='/' exact render={(props) => <Home {...props} />} />
+				<Route path='/' exact component={Home} />
 				<Route
 					path='/jobs/:jobId'
 					render={(props) => <JobDetails {...props} />}
